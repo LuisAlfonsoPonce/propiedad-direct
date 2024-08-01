@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title th:text=" ${titulo}"></title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon">
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+<header th:fragment="header">
+
+    <!-- ======= Sección de Búsqueda de Propiedades ======= -->
+    <div class="click-closed"></div>
+    <!--/ Formulario de Búsqueda /-->
+    <div class="box-collapse">
+        <div class="title-box-d">
+            <h3 class="title-d">Buscar Propiedad</h3>
+        </div>
+        <span class="close-box-collapse right-boxed bi bi-x"></span>
+        <div class="box-collapse-wrap form">
+            <form class="form-a">
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <div class="form-group">
+                            <label class="pb-2" for="Type">Palabra Clave</label>
+                            <input type="text" class="form-control form-control-lg form-control-a"
+                                   placeholder="Palabra Clave">
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <div class="form-group mt-3">
+                            <label class="pb-2" for="Type">Tipo</label>
+                            <select class="form-control form-select form-control-a" id="Type">
+                                <option>Todos los Tipos</option>
+                                <option>En Alquiler</option>
+                                <option>En Venta</option>
+                                <option>Casa Abierta</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <div class="form-group mt-3">
+                            <label class="pb-2" for="city">Ciudad</label>
+                            <select class="form-control form-select form-control-a" id="city">
+                                <option>Todas las Ciudades</option>
+                                <option>Alabama</option>
+                                <option>Arizona</option>
+                                <option>California</option>
+                                <option>Colorado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <div class="form-group mt-3">
+                            <label class="pb-2" for="bedrooms">Habitaciones</label>
+                            <select class="form-control form-select form-control-a" id="bedrooms">
+                                <option>Cualquiera</option>
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <div class="form-group mt-3">
+                            <label class="pb-2" for="garages">Garajes</label>
+                            <select class="form-control form-select form-control-a" id="garages">
+                                <option>Cualquiera</option>
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                                <option>04</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <div class="form-group mt-3">
+                            <label class="pb-2" for="bathrooms">Baños</label>
+                            <select class="form-control form-select form-control-a" id="bathrooms">
+                                <option>Cualquiera</option>
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <div class="form-group mt-3">
+                            <label class="pb-2" for="price">Precio Mínimo</label>
+                            <select class="form-control form-select form-control-a" id="price">
+                                <option>Ilimitado</option>
+                                <option>$50,000</option>
+                                <option>$100,000</option>
+                                <option>$150,000</option>
+                                <option>$200,000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-b">Buscar Propiedad</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div><!-- Fin de Sección de Búsqueda de Propiedades -->
+
+    <!-- ======= Cabecera/Barra de Navegación ======= -->
+    <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+        <div class="container">
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarDefault"
+                    aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a class="navbar-brand text-brand" th:href="@{/index}">Agencia<span class="color-b">Inmobiliaria</span></a>
+
+            <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/index}">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/acerca}">Acerca de</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/list-properties}">Propiedad</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/blog-grid}">Blog</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Páginas</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{/form-property}">Propiedad Individual</a>
+                            <a class="dropdown-item" th:href="@{/blog-single}">Blog Individual</a>
+                            <a class="dropdown-item" th:href="@{/list-agents}">Agentes</a>
+                            <a class="dropdown-item" th:href="@{/agent-single}">Agente Individual</a>
+                            <a class="dropdown-item" th:href="@{/list-clients}">Clientes</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contact}">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01">
+                <i class="bi bi-search"></i>
+            </button>
+
+        </div>
+    </nav><!-- Fin Cabecera/Barra de Navegación -->
+</header>
+
+<main id="main">
+
+
+</main>
+<!-- Fin #main -->
+
+<footer class="section-footer" th:fragment="footer">
+    <!-- ======= Pie de Página ======= -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="widget-a">
+                        <div class="w-header-a">
+                            <h3 class="w-title-a text-brand">EstateAgency</h3>
+                        </div>
+                        <div class="w-body-a">
+                            <p class="w-text-a color-text-a">
+                                Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo
+                                consequat duis
+                                sed aute irure.
+                            </p>
+                        </div>
+                        <div class="w-footer-a">
+                            <ul class="list-unstyled">
+                                <li class="color-a">
+                                    <span class="color-text-a">Teléfono .</span> contact@example.com
+                                </li>
+                                <li class="color-a">
+                                    <span class="color-text-a">Email .</span> +54 356 945234
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 section-md-t3">
+                    <div class="widget-a">
+                        <div class="w-header-a">
+                            <h3 class="w-title-a text-brand">La Empresa</h3>
+                        </div>
+                        <div class="w-body-a">
+                            <div class="w-body-a">
+                                <ul class="list-unstyled">
+                                    <li class="item-list-a">
+                                        <i class="bi bi-chevron-right"></i> <a href="#">Mapa del Sitio</a>
+                                    </li>
+                                    <li class="item-list-a">
+                                        <i class="bi bi-chevron-right"></i> <a href="#">Legal</a>
+                                    </li>
+                                    <li class="item-list-a">
+                                        <i class="bi bi-chevron-right"></i> <a href="#">Administración de Agentes</a>
+                                    </li>
+                                    <li class="item-list-a">
+                                        <i class="bi bi-chevron-right"></i> <a href="#">Carreras</a>
+                                    </li>
+                                    <li class="item-list-a">
+                                        <i class="bi bi-chevron-right"></i> <a href="#">Afiliados</a>
+                                    </li>
+                                    <li class="item-list-a">
+                                        <i class="bi bi-chevron-right"></i> <a href="#">Política de Privacidad</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 section-md-t3">
+                    <div class="widget-a">
+                        <div class="w-header-a">
+                            <h3 class="w-title-a text-brand">Sitios Internacionales</h3>
+                        </div>
+                        <div class="w-body-a">
+                            <ul class="list-unstyled">
+                                <li class="item-list-a">
+                                    <i class="bi bi-chevron-right"></i> <a href="#">Venezuela</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="bi bi-chevron-right"></i> <a href="#">China</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="bi bi-chevron-right"></i> <a href="#">Hong Kong</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="bi bi-chevron-right"></i> <a href="#">Argentina</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="bi bi-chevron-right"></i> <a href="#">Singapur</a>
+                                </li>
+                                <li class="item-list-a">
+                                    <i class="bi bi-chevron-right"></i> <a href="#">Filipinas</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="nav-footer">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="#">Inicio</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Acerca de</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Propiedad</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Blog</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="socials-a">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="bi bi-facebook" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="bi bi-twitter" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="bi bi-instagram" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="bi bi-linkedin" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copyright-footer">
+                    <p class="copyright color-text-a">
+                        &copy; Copyright
+                        <span class="color-a">EstateAgency</span> Todos los Derechos Reservados.
+                    </p>
+                </div>
+                <div class="credits">
+                    <!--
+                    All the links in the footer should remain intact.
+                    You can delete the links only if you purchased the pro version.
+                    Licensing information: https://bootstrapmade.com/license/
+                    Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=EstateAgency
+                  -->
+                    Diseñado por <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><!-- Fin de Pie de Página -->
+
+<div th:fragment="javascript">
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Archivos JS del Proveedor -->
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+    <!-- Archivo Principal JS de la Plantilla -->
+    <script th:src="@{/js/main.js}"></script>
+</div>
+
+</body>
+
+</html>

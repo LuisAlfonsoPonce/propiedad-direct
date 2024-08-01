@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+<head th:replace="layout/layout :: header"></head>
+
+<main id="main">
+
+    <!-- ======= Introducción Individual ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">Crear Cliente</h1>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a th:href="@{/index}">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Crear cliente
+                            </li>
+                        </ol>
+                    </nav>
+
+
+                </div>
+            </div>
+        </div>
+    </section><!-- Fin Introducción Individual -->
+
+    <!-- ======= Sección Acerca de ======= -->
+    <section class="section-about">
+        <div class="container">
+            <div th:object="${client}" th:remove="tag">
+                <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+            </div>
+            <form th:action="@{/save-client}" th:object="${client}" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">Nombre</label>
+                            <input type="text" name="firstName" class="form-control form-control-lg form-control-a"
+                                   id="firstName" th:field="*{firstName}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Apellido</label>
+                            <input type="text" name="lastName" class="form-control form-control-lg form-control-a"
+                                   id="lastName" th:field="*{lastName}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Correo</label>
+                            <input type="email" name="email" class="form-control form-control-lg form-control-a"
+                                   id="email" th:field="*{email}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Telefono</label>
+                            <input type="number" name="phone" class="form-control form-control-lg form-control-a"
+                                   id="phone" th:field="*{phone}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Contacto preferente</label>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="radio" id="preferredContactMethodPhone"
+                                               name="preferredContactMethod"
+                                               value="phone" th:field="*{preferredContactMethod}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="preferredContactMethodPhone"
+                                               class="form-check-label">Teléfono</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="preferredContactMethodEmail"
+                                               name="preferredContactMethod"
+                                               value="email" th:field="*{preferredContactMethod}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="preferredContactMethodEmail" class="form-check-label">Email</label>
+                                    </div>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('preferredContactMethod')}" th:errors="*{preferredContactMethod}"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                </div>
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-a">Guardar Cliente</button>
+                </div>
+            </form>
+        </div>
+    </section><!-- Fin Sección Acerca de -->
+
+
+</main><!-- Fin #main -->
+
+<head th:replace="layout/layout :: footer">
+
+<head th:replace="layout/layout :: javascript"></head>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+application:
+    controllers:
+        titulo: Agencia Inmobiliaria
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: DEBUG
+spring:
+    application:
+        name: propiedad-direct
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: ${SPRING_DATASOURCE_URL}
+        username: ${SPRING_DATASOURCE_USERNAME}
+        password: ${SPRING_DATASOURCE_PASSWORD}
+    h2:
+        console:
+            enabled: false
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                format_sql: true
+                globally_quoted_identifiers: true
+        show-sql: true

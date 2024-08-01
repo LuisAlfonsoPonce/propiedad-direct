@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+<head th:replace="layout/layout :: header"></head>
+
+<main id="main">
+
+    <!-- ======= Introducción Individual ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">Lista de Clientes</h1>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a th:href="@{/index}">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Lista de clientes
+                            </li>
+                        </ol>
+                    </nav>
+
+
+                </div>
+            </div>
+        </div>
+    </section><!-- Fin Introducción Individual -->
+
+    <!-- ======= Sección Acerca de ======= -->
+    <section class="section-about">
+        <div class="container">
+            <a th:href="@{/form-client}" class="btn btn-b-n">Crear Cliente</a>
+            <div class="table">
+                <div class="row header">
+                    <div class="col-sm-1">Id</div>
+                    <div class="col-sm-1">Nombre</div>
+                    <div class="col-sm-1">Apellido</div>
+                    <div class="col-sm-2">Correo</div>
+                    <div class="col-sm-1">Telefono</div>
+                    <div class="col-sm-1">Contacto</div>
+                    <div class="col-sm-3">Fecha</div>
+                    <div class="col-sm-1">Editar</div>
+                    <div class="col-sm-1">Eliminar</div>
+                </div>
+                <div class="row" th:each="client: ${clients} ">
+                    <div class="col-sm-1 position-relative" th:text="${client.clientId}"></div>
+                    <div class="col-sm-1 position-relative" th:text="${client.firstName}"></div>
+                    <div class="col-sm-1 position-relative" th:text="${client.lastName}"></div>
+                    <div class="col-sm-2 position-relative" th:text="${client.email}"></div>
+                    <div class="col-sm-1 position-relative" th:text="${client.phone}"></div>
+                    <div class="col-sm-1 position-relative" th:if="${client.preferredContactMethod.equals('email')}" th:text="'Correo'"></div>
+                    <div class="col-sm-1 position-relative" th:if="${client.preferredContactMethod.equals('phone')}" th:text="'Teléfono'"></div>
+                    <div class="col-sm-3 position-relative" th:text="${client.createAt}"></div>
+                    <div class="col-sm-1 position-relative">
+                        <a th:href="@{'/form-client/' + ${client.clientId}}" class="btn btn-b-n">Editar</a>
+                    </div>
+                    <div class="col-sm-1 position-relative">
+                        <a th:href="@{'/delete-client/' + ${client.clientId}}" class="btn btn-b-danger" onclick="return confirm('Esta seguro de eliminar');">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- Fin Sección Acerca de -->
+
+
+</main><!-- Fin #main -->
+
+<head th:replace="layout/layout :: footer">
+
+<head th:replace="layout/layout :: javascript"></head>
+
+</body>
+
+</html>

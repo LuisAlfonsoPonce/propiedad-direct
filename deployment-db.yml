@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: propiedad-direct-db
+  labels:
+    app: propiedad-direct-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: propiedad-direct-db
+  template:
+    metadata:
+      labels:
+        app: propiedad-direct-db
+    spec:
+      containers:
+        - name: propiedad-direct-db
+          image: postgres:latest
+          env:
+            - name: POSTGRES_DB
+              value: propiedad-direct
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: admin
+          ports:
+            - containerPort: 5432

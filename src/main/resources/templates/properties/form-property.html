@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+<head th:replace="layout/layout :: header"></head>
+
+<main id="main">
+
+    <!-- ======= Introducción Individual ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">Crear Propiedad</h1>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a th:href="@{/index}">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Crear propiedad
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- Fin Introducción Individual -->
+
+    <!-- ======= Sección Acerca de ======= -->
+    <section class="property-single">
+        <div class="container">
+            <div th:object="${propertyBean}" th:remove="tag">
+                <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+            </div>
+            <form th:action="@{/save-property}" th:object="${propertyBean}" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="address" class="form-label">Dirección</label>
+                            <input type="text" name="address" class="form-control form-control-lg form-control-a"
+                                   id="address" th:field="*{address}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('address')}"
+                                   th:errors="*{address}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="colony" class="form-label">Colonia</label>
+                            <input type="text" name="colony" class="form-control form-control-lg form-control-a"
+                                   id="colony" th:field="*{colony}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('colony')}"
+                                   th:errors="*{colony}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Teléfono</label>
+                            <input type="text" name="phone" class="form-control form-control-lg form-control-a"
+                                   id="phone" th:field="*{phone}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}"
+                                   th:errors="*{phone}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="capacity" class="form-label">Capacidad</label>
+                            <input type="number" name="capacity" class="form-control form-control-lg form-control-a"
+                                   id="capacity" th:field="*{capacity}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('capacity')}"
+                                   th:errors="*{capacity}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="city" class="form-label">Ciudad</label>
+                            <input type="text" name="city" class="form-control form-control-lg form-control-a" id="city"
+                                   th:field="*{city}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('city')}"
+                                   th:errors="*{city}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="state" class="form-label">Estado</label>
+                            <select name="state" class="form-control form-control-lg form-control-a" id="state" th:field="*{state}" th:errorclass="'alert-danger'">
+                                <option value="" disabled selected>Selecciona un estado</option>
+                                <option th:each="state : ${states}" th:value="${state.stateId}" th:text="${state.name}"></option>
+                            </select>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="zipCode" class="form-label">Código Postal</label>
+                            <input type="number" name="zipCode" class="form-control form-control-lg form-control-a"
+                                   id="zipCode" th:field="*{zipCode}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('zipCode')}"
+                                   th:errors="*{zipCode}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="price" class="form-label">Precio</label>
+                            <input type="number" name="price" class="form-control form-control-lg form-control-a"
+                                   id="price" th:field="*{price}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('price')}"
+                                   th:errors="*{price}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="size" class="form-label">Tamaño</label>
+                            <input type="number" name="size" class="form-control form-control-lg form-control-a"
+                                   id="size" th:field="*{size}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('size')}"
+                                   th:errors="*{size}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="bedrooms" class="form-label">Dormitorios</label>
+                            <input type="number" name="bedrooms" class="form-control form-control-lg form-control-a"
+                                   id="bedrooms" th:field="*{bedrooms}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('bedrooms')}"
+                                   th:errors="*{bedrooms}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="bathrooms" class="form-label">Baños</label>
+                            <input type="number" name="bathrooms" class="form-control form-control-lg form-control-a"
+                                   id="bathrooms" th:field="*{bathrooms}" th:errorclass="'alert-danger'">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('bathrooms')}"
+                                   th:errors="*{bathrooms}"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Estatus</label>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="radio" id="statusAvailable" name="status" value="available"
+                                               th:field="*{status}" class="form-check-input"
+                                               th:errorclass="'alert-danger'">
+                                        <label for="statusAvailable" class="form-check-label">Disponible</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="statusNotAvailable" name="status" value="not_available"
+                                               th:field="*{status}" class="form-check-input"
+                                               th:errorclass="'alert-danger'">
+                                        <label for="statusNotAvailable" class="form-check-label">No Disponible</label>
+                                    </div>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('status')}"
+                                           th:errors="*{status}"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Venta/Renta</label>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="radio" id="saleRentSale" name="saleRent" value="VENTA"
+                                               th:field="*{saleRent}" class="form-check-input"
+                                               th:errorclass="'alert-danger'">
+                                        <label for="saleRentSale" class="form-check-label">Venta</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="saleRentRent" name="saleRent" value="RENTA"
+                                               th:field="*{saleRent}" class="form-check-input"
+                                               th:errorclass="'alert-danger'">
+                                        <label for="saleRentRent" class="form-check-label">Renta</label>
+                                    </div>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('saleRent')}"
+                                           th:errors="*{saleRent}"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Adicionales</label>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="parking" name="parking" th:field="*{parking}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="parking" class="form-check-label">¿Tiene estacionamiento?</label>
+                                    </div>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('garage')}"
+                                           th:errors="*{parking}"></small>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="garage" name="garage" th:field="*{garage}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="garage" class="form-check-label">¿Tiene garaje?</label>
+                                    </div>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('garage')}"
+                                           th:errors="*{garage}"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Tipo</label>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="radio" id="typeDpto" name="type" value="dpto" th:field="*{type}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="typeDpto" class="form-check-label">Departamento</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="typeCasa" name="type" value="casa" th:field="*{type}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="typeCasa" class="form-check-label">Casa</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="typeOficina" name="type" value="oficina"
+                                               th:field="*{type}" class="form-check-input"
+                                               th:errorclass="'alert-danger'">
+                                        <label for="typeOficina" class="form-check-label">Oficina</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="typeLoft" name="type" value="loft" th:field="*{type}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="typeLoft" class="form-check-label">Loft</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="typeRoom" name="type" value="loft" th:field="*{type}"
+                                               class="form-check-input" th:errorclass="'alert-danger'">
+                                        <label for="typeRoom" class="form-check-label">Habitación</label>
+                                    </div>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('type')}"
+                                           th:errors="*{type}"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Imagen</label>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="imageFile" class="form-label">Imagen</label>
+                                    <input type="file" name="imageFile"
+                                           class="form-control form-control-lg form-control-a" id="imageFile"
+                                           th:errorclass="'alert-danger'" th:field="*{imageFile}">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('imageFile')}"
+                                           th:errors="*{imageFile}"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center mb-4">
+                    <button type="submit" class="btn btn-a">Guardar Propiedad</button>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div id="property-single-carousel" class="swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="carousel-item-b swiper-slide">
+                                        <div th:if="*{imageBase64 != null}">
+                                            <img id="imageBase64" th:src="'data:image/jpeg;base64,' + *{imageBase64}" alt="Imagen Cargada" />
+                                        </div>
+                                        <!-- Mostrar la imagen previsualizada si no hay imagen Base64 -->
+                                            <img id="outputImage" style="display: none;" alt="Previsualización de Imagen" src="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-single-carousel-pagination carousel-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </section>
+
+
+    <!-- Fin Sección Acerca de -->
+
+</main><!-- Fin #main -->
+
+<head th:replace="layout/layout :: footer"></head>
+
+<head th:replace="layout/layout :: javascript"></head>
+
+</body>
+
+</html>

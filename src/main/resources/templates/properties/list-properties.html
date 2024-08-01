@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+<head th:replace="layout/layout :: header"></head>
+
+<main id="main">
+
+    <!-- ======= Introducción Individual ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">Nuestras Propiedades Asombrosas</h1>
+                        <span class="color-text-a">Propiedades en Grid</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a th:href="@{/index}">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Propiedades en Grid
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- Fin Introducción Individual -->
+
+    <!-- ======= Grid de Propiedades ======= -->
+    <section class="property-grid grid">
+        <div class="container">
+            <a th:href="@{/form-property}" class="btn btn-b-n">Crear Propiedad</a>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="grid-option">
+                        <form>
+                            <select class="custom-select">
+                                <option selected>Todo</option>
+                                <option value="1">En Renta</option>
+                                <option value="2">En Venta</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4" th:each="property: ${properties} ">
+                    <div class="card-box-a card-shadow">
+                        <div class="img-box-a">
+                            <img th:src="'data:image/jpeg;base64,' + ${property.imageBase64}" class="img-a img-fluid"
+                                 alt=""/>
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-overlay-a-content">
+                                <div class="card-header-a">
+                                    <h2 class="card-title-a">
+                                        <a th:href="@{'/form-property/' + ${property.propertyId}}" th:text="${property.address}"></a>
+                                    </h2>
+                                </div>
+                                <div class="card-body-a">
+                                    <div class="price-box d-flex">
+                                        <span class="price-a"
+                                              th:text="${property.type  + ' EN ' + property.saleRent + ' | $' + #numbers.formatDecimal(property.price, 0, 'COMMA', 2, 'POINT') }"></span>
+                                    </div>
+                                    <a th:href="@{'/form-property/' + ${property.propertyId}}" class="link-a">Haz clic aquí para ver o editar
+                                        <span class="bi bi-chevron-right"></span>
+                                    </a>
+                                </div>
+                                <div class="card-footer-a">
+                                    <ul class="card-info d-flex justify-content-around">
+                                        <li>
+                                            <h4 class="card-info-title">Área</h4>
+                                            <span><span th:text="${property.size} + ' m'"/><sup>2</sup></span>
+                                        </li>
+                                        <li>
+                                            <h4 class="card-info-title">Cuartos</h4>
+                                            <span th:text="${property.bedrooms}"/>
+                                        </li>
+                                        <li>
+                                            <h4 class="card-info-title">Baños</h4>
+                                            <span th:text="${property.bathrooms}"/>
+                                        </li>
+                                        <li>
+                                            <h4 class="card-info-title">Estacionamiento</h4>
+                                            <span th:if="${property.parking}" th:text="'Sí'"/>
+                                            <span th:if="${!property.parking}" th:text="'No'"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <nav class="pagination-a">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">
+                                    <span class="bi bi-chevron-left"></span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link active" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item next">
+                                <a class="page-link" href="#">
+                                    <span class="bi bi-chevron-right"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Grid de Propiedades -->
+
+</main><!-- Fin #main -->
+
+<head th:replace="layout/layout :: footer"></head>
+
+<head th:replace="layout/layout :: javascript"></head>
+
+</body>
+
+</html>

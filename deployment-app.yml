@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: propiedad-direct-app
+  labels:
+    app: propiedad-direct-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: propiedad-direct-app
+  template:
+    metadata:
+      labels:
+        app: propiedad-direct-app
+    spec:
+      containers:
+        - name: propiedad-direct-app
+          image: handsomealf/propiedad-direct-app:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://propiedad-direct-db:5432/propiedad-direct
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: admin
