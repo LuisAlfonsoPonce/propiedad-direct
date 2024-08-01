@@ -81,6 +81,17 @@ public class Property implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agent_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Agent agent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = true)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Client client;
+
     @PrePersist
     private void prePersist(){
         createAt = new Date();

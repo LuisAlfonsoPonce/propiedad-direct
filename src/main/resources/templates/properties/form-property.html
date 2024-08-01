@@ -146,6 +146,9 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label class="form-label">Estatus</label>
                         </div>
@@ -168,6 +171,15 @@
                                            th:errors="*{status}"></small>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="client" class="form-label">Cliente</label>
+                            <input type="text" id="clientAutocomplete" class="form-control form-control-lg form-control-a"
+                                   placeholder="Buscar Cliente..." th:field="*{clientName}">
+                            <input type="hidden" th:field="*{client}" id="client" name="client" />
+                            <ul id="clientList" class="list-group" style="position: absolute; z-index: 1000;"></ul>
                         </div>
                     </div>
 
@@ -196,6 +208,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label class="form-label">Adicionales</label>

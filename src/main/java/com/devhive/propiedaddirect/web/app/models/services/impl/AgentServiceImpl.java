@@ -5,7 +5,7 @@ import com.devhive.propiedaddirect.web.app.models.daos.IAgentDao;
 import com.devhive.propiedaddirect.web.app.models.entities.Agent;
 import com.devhive.propiedaddirect.web.app.models.services.IAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +21,7 @@ public class AgentServiceImpl implements IAgentService {
     @Override
     @Transactional(readOnly = true)
     public List<Agent> findAll() {
-        return (List<Agent>) agentDao.findAll();
+        return agentDao.findAll(Sort.by(Sort.Direction.DESC, "createAt"));
     }
 
     @Override
@@ -68,8 +68,6 @@ public class AgentServiceImpl implements IAgentService {
         agentBean.setEmail(agent.getEmail());
         agentBean.setDescription(agent.getDescription());
         agentBean.setImageBase64(agent.getImageBase64());
-        byte[] imageBytes = Base64.getDecoder().decode(agentBean.getImageBase64());
-        agentBean.setImageFile(new MockMultipartFile("imageFile", "image.jpg", "image/jpeg", imageBytes));
         return agentBean;
     }
 

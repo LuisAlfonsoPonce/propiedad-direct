@@ -67,6 +67,12 @@ public class PropertyBean {
 
  
     private String imageBase64;
+
+    private Long agent;
+
+    private Long client;
+
+    private String clientName;
     
     
     @FileSize(min = 1024, max = 1048576)

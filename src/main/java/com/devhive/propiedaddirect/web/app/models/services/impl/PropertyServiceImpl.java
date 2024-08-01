@@ -2,16 +2,16 @@ package com.devhive.propiedaddirect.web.app.models.services.impl;
 
 import com.devhive.propiedaddirect.web.app.models.beans.PropertyBean;
 import com.devhive.propiedaddirect.web.app.models.daos.IPropertyDao;
+import com.devhive.propiedaddirect.web.app.models.entities.Agent;
+import com.devhive.propiedaddirect.web.app.models.entities.Client;
 import com.devhive.propiedaddirect.web.app.models.entities.Property;
 import com.devhive.propiedaddirect.web.app.models.entities.State;
 import com.devhive.propiedaddirect.web.app.models.services.IPropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -49,6 +49,13 @@ public class PropertyServiceImpl implements IPropertyService {
         Property property = new Property();
         State state = new State();
         state.setStateId(propertyBean.getState());
+
+        Client client = new Client();
+        client.setClientId(propertyBean.getClient());
+
+        Agent agent = new Agent();
+        agent.setAgentId(propertyBean.getAgent());
+
         if(propertyBean.getPropertyId()!=null) {
         	 property.setPropertyId(propertyBean.getPropertyId());
         }
@@ -69,6 +76,8 @@ public class PropertyServiceImpl implements IPropertyService {
         property.setGarage(propertyBean.getGarage());
         property.setParking(propertyBean.getParking());
         property.setImageBase64(propertyBean.getImageBase64());
+        property.setClient(client);
+        property.setAgent(agent);
         return property;
     }
     
@@ -95,9 +104,15 @@ public class PropertyServiceImpl implements IPropertyService {
         propertyBean.setGarage(property.getGarage());
         propertyBean.setParking(property.getParking());
         propertyBean.setImageBase64(property.getImageBase64());
-        byte[] imageBytes = Base64.getDecoder().decode(propertyBean.getImageBase64());
-        propertyBean.setImageFile(new MockMultipartFile("imageFile", "image.jpg", "image/jpeg", imageBytes));
+        propertyBean.setClient(property.getClient().getClientId());
+        propertyBean.setClientName(property.getClient().getFirstName() + " "+ property.getClient().getLastName());
+        propertyBean.setAgent(property.getAgent().getAgentId());
         return propertyBean;
+    }
+
+    @Override
+    public List<Property> findBySaleRent(String saleRent) {
+        return propertyDao.findBySaleRent(saleRent);
     }
 
 }

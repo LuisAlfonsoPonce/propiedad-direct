@@ -9,4 +9,5 @@ public interface IClientService {
     Client findOne(Long clientId);
     void save(Client client);
     void delete (Long clientId);
+    List<Client> findByName(String term);
 }

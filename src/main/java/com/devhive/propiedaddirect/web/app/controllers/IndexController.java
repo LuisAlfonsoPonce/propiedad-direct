@@ -28,8 +28,9 @@ public class IndexController {
 		return "index";
 	}
 	
-	@GetMapping("/acerca")
+	@GetMapping("/about")
 	public String acerca(Model model) {
+		model.addAttribute("agents", agentsService.findAll());
 		model.addAttribute("titulo", titulo);
 		return "about";
 	}
@@ -44,12 +45,6 @@ public class IndexController {
 	public String blogSingle(Model model) {
 		model.addAttribute("titulo", titulo);
 		return "blogs/blog-single";
-	}
-	
-	@GetMapping("/agent-single")
-	public String agentSingle(Model model) {
-		model.addAttribute("titulo", titulo);
-		return "agents/agent-single";
 	}
 
 	@GetMapping("/contact")

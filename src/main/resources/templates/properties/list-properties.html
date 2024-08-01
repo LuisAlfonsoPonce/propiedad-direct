@@ -42,11 +42,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="grid-option">
-                        <form>
-                            <select class="custom-select">
-                                <option selected>Todo</option>
-                                <option value="1">En Renta</option>
-                                <option value="2">En Venta</option>
+                        <form th:action="@{/filter-properties}" method="get">
+                            <select class="custom-select" name="saleRent" onchange="this.form.submit()">
+                                <option value="" th:selected="${saleRent == null or saleRent == ''}">Todo</option>
+                                <option value="RENTA" th:selected="${saleRent == 'RENTA'}">En Renta</option>
+                                <option value="VENTA" th:selected="${saleRent == 'VENTA'}">En Venta</option>
                             </select>
                         </form>
                     </div>

@@ -7,6 +7,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -46,6 +47,9 @@ public class Client implements Serializable {
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+
+    @OneToMany(mappedBy = "client")
+    private List<Property> properties;
 
     @PrePersist
     private void prePersist(){

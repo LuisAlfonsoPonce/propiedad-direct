@@ -17,4 +17,6 @@ public interface IPropertyService {
     Property convertToEntity(PropertyBean propertyBean);
     
     PropertyBean convertToBean(Property property);
+
+    List<Property> findBySaleRent(String saleRent);
 }

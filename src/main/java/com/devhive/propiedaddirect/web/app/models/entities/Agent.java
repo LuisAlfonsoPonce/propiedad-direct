@@ -8,6 +8,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -49,6 +50,9 @@ public class Agent implements Serializable {
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
+
+    @OneToMany(mappedBy = "agent")
+    private List<Property> properties;
 
     @PrePersist
     private void prePersist(){

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IPropertyDao extends CrudRepository<Property, Long> {
     List<Property> findAll(Sort sort);
+
+    List<Property> findBySaleRent(String saleRent);
 }

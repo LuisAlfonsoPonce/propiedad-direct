@@ -1,7 +1,10 @@
 package com.devhive.propiedaddirect.web.app.controllers;
 
 import com.devhive.propiedaddirect.web.app.models.beans.PropertyBean;
+import com.devhive.propiedaddirect.web.app.models.entities.Agent;
+import com.devhive.propiedaddirect.web.app.models.entities.Client;
 import com.devhive.propiedaddirect.web.app.models.entities.Property;
+import com.devhive.propiedaddirect.web.app.models.services.IClientService;
 import com.devhive.propiedaddirect.web.app.models.services.IPropertyService;
 import com.devhive.propiedaddirect.web.app.models.services.IStateService;
 import jakarta.validation.Valid;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -30,6 +34,9 @@ public class PropertyController {
 
     @Autowired
     private IStateService stateService;
+
+    @Autowired
+    private IClientService clientService;
 
     @GetMapping("/list-properties")
     public String listProperties(Model model) {
@@ -70,6 +77,9 @@ public class PropertyController {
             }
         }
 
+        Agent agent= new Agent();
+        agent.setAgentId(1L);
+        property.setAgent(agent);
         propertyService.save(property);
         sessionStatus.setComplete();
         return "redirect:/list-properties";
@@ -98,5 +108,25 @@ public class PropertyController {
             propertyService.delete(propertyId);
         }
         return "redirect:/list-properties";
+    }
+
+    @GetMapping("/filter-properties")
+    public String filterProperties(@RequestParam(value = "saleRent", required = false) String saleRent, Model model) {
+        List<Property> properties;
+        if (saleRent == null || saleRent.isEmpty()) {
+            properties = propertyService.findAll();
+        } else {
+            properties = propertyService.findBySaleRent(saleRent);
+        }
+        model.addAttribute("titulo", titulo);
+        model.addAttribute("properties", properties);
+        model.addAttribute("saleRent", saleRent);
+        return "properties/list-properties";
+    }
+
+    @GetMapping("/autocomplete-clients")
+    @ResponseBody
+    public List<Client> autocompleteClients(@RequestParam("term") String term) {
+        return clientService.findByName(term);
     }
 }

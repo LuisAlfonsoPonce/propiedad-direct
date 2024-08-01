@@ -38,4 +38,12 @@ public class ClientServiceImpl implements IClientService {
     public void delete(Long clientId) {
         clientDao.deleteById(clientId);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Client> findByName(String term) {
+        return clientDao.findByName(term);
+    }
+
+
 }
