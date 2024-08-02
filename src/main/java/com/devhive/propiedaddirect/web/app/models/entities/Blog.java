@@ -27,17 +27,27 @@ public class Blog implements Serializable {
     @NotEmpty
     private String saleRent;
 
-    @Column(columnDefinition = "TEXT")
+    // Relación ManyToOne con Agent
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agent_id", nullable = true)
+    private Agent agent;
+
+    // Relación ManyToOne con Client
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = true)
+    private Client client;
+
+    @Column(columnDefinition = "text")
     private String description;
 
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
+    
     @Column(name = "image_base64", columnDefinition = "text")
     private String imageBase64;
 
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
-
 }

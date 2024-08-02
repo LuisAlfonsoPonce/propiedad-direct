@@ -1,6 +1,7 @@
 package com.devhive.propiedaddirect.web.app.controllers;
 
 import com.devhive.propiedaddirect.web.app.models.services.IAgentService;
+import com.devhive.propiedaddirect.web.app.models.services.IBlogService;
 import com.devhive.propiedaddirect.web.app.models.services.IPropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,12 +20,16 @@ public class IndexController {
 
 	@Autowired
 	private IAgentService agentsService;
+
+	@Autowired
+	private IBlogService blogService;
 	
 	@GetMapping({"","/", "/index", "/home"})
 	public String index(Model model) {
 		model.addAttribute("titulo", titulo);
 		model.addAttribute("properties", propertyService.findAll());
 		model.addAttribute("agents", agentsService.findAll());
+		model.addAttribute("blogs", blogService.findAll());
 		return "index";
 	}
 	
@@ -33,18 +38,6 @@ public class IndexController {
 		model.addAttribute("agents", agentsService.findAll());
 		model.addAttribute("titulo", titulo);
 		return "about";
-	}
-	
-	@GetMapping("/blog-grid")
-	public String blogGrid(Model model) {
-		model.addAttribute("titulo", titulo);
-		return "blogs/blog-grid";
-	}
-	
-	@GetMapping("/blog-single")
-	public String blogSingle(Model model) {
-		model.addAttribute("titulo", titulo);
-		return "blogs/blog-single";
 	}
 
 	@GetMapping("/contact")
